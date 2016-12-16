@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vuex的router</title>
+</head>
+<body>
+<div id="app">
+    <p>
+        <router-link to="/user/foo/hah/hehe">/user/foo</router-link>
+        <router-link to="/user/bar/he/aaa">/user/bar</router-link>
+    </p>
+    <router-view></router-view>
+</div>
+<script src="http://cdn.bootcss.com/vue/2.1.4/vue.js"></script>
+<script src="http://cdn.bootcss.com/vue-router/2.1.1/vue-router.min.js"></script>
+<script type="text/javascript">
+    /*const Foo={template:'<h1>foo</h1>'};
+    const Bar={template:'<h2>bar</h2>'};
+    const routes=[
+        {path:'/user/foo',component:Foo} ,
+        {path:'/user/bar',component:Bar}
+    ];*/
+    //用到:params之后更加灵活
+    const routes=[
+        {path:'/user/:uuu/:cd/:c',component:{template:'<h3>User {{$route.params.uuu}}<a href="#">{{$route.params.cd}}</a><span>{{$route.params.c}}</span></h3>'}}
+    ]
+    const router=new VueRouter({
+        routes
+    })
+    new Vue({
+        router,
+        el:'#app'
+    });
+</script>
+</body>
+</html>

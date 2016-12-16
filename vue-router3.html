@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>嵌套路由</title>
+</head>
+<body>
+<div id="test">
+    <p>
+        <router-link to="/user/foo">foo</router-link>
+        <router-link to="/user/foo/a">foo/a</router-link>
+        <router-link to="/user/foo/b">foo/b</router-link>
+    </p>
+    <router-view></router-view>
+</div>
+</body>
+<script src="http://cdn.bootcss.com/vue/2.1.4/vue.js"></script>
+<script src="http://cdn.bootcss.com/vue-router/2.1.1/vue-router.min.js"></script>
+<script>
+    var Foo={
+        template:'<div><h1>User {{$route.params.id}}</h1><router-view></router-view></div>'
+    }
+
+    var Home={
+        template:'<h2>Home</h2>'
+    };
+    var A={
+        template:'<h2>A</h2>'
+    };
+    var B={
+        template:'<h2>B</h2>'
+    }
+    const routes=[
+        {
+            path:'/user/:id',
+            component:Foo,
+            children:[
+                {path:'',component:Home},
+                {path:'a',component:A},
+                {path:'b',component:B},
+            ]
+        }
+    ];
+    const router=new VueRouter({
+        routes
+    });
+    new Vue({
+        router,
+       el:'#test'
+    });
+</script>
+</body>
+</html>
